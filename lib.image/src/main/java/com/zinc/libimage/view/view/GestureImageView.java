@@ -27,8 +27,6 @@ public class GestureImageView extends CropImageView {
 
     private int mDoubleTapScaleSteps = 5;
 
-    private ZoomImageToPosition mZoomImageToPositionRunnable;
-
     public GestureImageView(Context context) {
         this(context, null, 0);
     }
@@ -57,6 +55,10 @@ public class GestureImageView extends CropImageView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //优化体验，防止还在动画就进行下次操作
+        if(event.getActionMasked() == MotionEvent.ACTION_DOWN){
+            cancelAllAnimations();
+        }
 
         if (event.getPointerCount() > 1) {
             // TODO: 2018/2/26 需要修复
@@ -103,19 +105,6 @@ public class GestureImageView extends CropImageView {
 
         post(mZoomImageToPositionRunnable = new ZoomImageToPosition(GestureImageView.this,
                 durationMs, oldScale, deltaScale, centerX, centerY));
-    }
-
-    /**
-     *
-     * @date 创建时间 2018/3/5
-     * @author Jiang zinc
-     * @Description 移除动画
-     * @version
-     *
-     */
-    private void cancelAllAnimations() {
-        removeCallbacks(mZoomImageToPositionRunnable);
-        removeCallbacks(mWrapCropBoundsRunnable);
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{

@@ -11,12 +11,12 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.zinc.libimage.anim.WrapCropBoundsRunnable;
+import com.zinc.libimage.anim.ZoomImageToPosition;
 import com.zinc.libimage.utils.RectUtils;
 import com.zinc.libimage.utils.UIUtil;
 import com.zinc.libimage.widget.FastBitmapDrawable;
@@ -49,6 +49,7 @@ public class CropImageView extends TransformImageView {
     private float mTargetAspectRatio;
 
     protected WrapCropBoundsRunnable mWrapCropBoundsRunnable;
+    protected ZoomImageToPosition mZoomImageToPositionRunnable;
 
     private long mImageToWrapCropBoundsAnimDuration = DEFAULT_IMAGE_TO_CROP_BOUNDS_ANIM_DURATION;
 
@@ -104,7 +105,31 @@ public class CropImageView extends TransformImageView {
         mCurrentImageMatrix.postScale(initialMinScale, initialMinScale);
 
         calculateImageScaleBounds(w, h);
+        setupInitialImagePosition(w, h);
 
+    }
+
+    /**
+     * 初始化图像位置
+     * @param drawableWidth
+     * @param drawableHeight
+     */
+    private void setupInitialImagePosition(float drawableWidth, float drawableHeight) {
+        float cropRectWidth = mCropRect.width();
+        float cropRectHeight = mCropRect.height();
+
+        float widthScale = mCropRect.width() / drawableWidth;
+        float heightScale = mCropRect.height() / drawableHeight;
+
+        float initialMinScale = Math.max(widthScale, heightScale);
+
+        float tw = (cropRectWidth - drawableWidth * initialMinScale) / 2.0f + mCropRect.left;
+        float th = (cropRectHeight - drawableHeight * initialMinScale) / 2.0f + mCropRect.top;
+
+        mCurrentImageMatrix.reset();
+        mCurrentImageMatrix.postScale(initialMinScale, initialMinScale);
+        mCurrentImageMatrix.postTranslate(tw, th);
+        setImageMatrix(mCurrentImageMatrix);
     }
 
     public boolean isImageWrapCropBounds() {
@@ -131,6 +156,19 @@ public class CropImageView extends TransformImageView {
 
         return RectUtils.trapToRect(unrotatedImageCorners).contains(RectUtils.trapToRect(unrotatedCropBoundsCorners));
 
+    }
+
+    /**
+     *
+     * @date 创建时间 2018/3/5
+     * @author Jiang zinc
+     * @Description 移除动画
+     * @version
+     *
+     */
+    public void cancelAllAnimations() {
+        removeCallbacks(mZoomImageToPositionRunnable);
+        removeCallbacks(mWrapCropBoundsRunnable);
     }
 
     //===================================缩放方法 start===================================
@@ -249,7 +287,7 @@ public class CropImageView extends TransformImageView {
         }
         calculateImageScaleBounds(getDrawable().getIntrinsicWidth(), getDrawable().getIntrinsicHeight());
         //4、进行平移、缩放；但不用旋转
-        setImageToWrapCropBounds(true);
+        setImageToWrapCropBounds();
     }
 
     /**
@@ -404,7 +442,9 @@ public class CropImageView extends TransformImageView {
         setImageMatrix(mCurrentImageMatrix);
     }
 
-    public Bitmap cropAndSave() {
+    public Bitmap crop() {
+
+        cancelAllAnimations();
 
         mTempMatrix.reset();
         mTempMatrix.setRotate(-getCurrentAngle());

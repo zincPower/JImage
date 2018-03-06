@@ -48,8 +48,7 @@
         android:id="@+id/control_rotate_bar"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_above="@+id/divider"
-        android:visibility="invisible">
+        android:layout_above="@+id/divider">
 
         <ImageView
             android:id="@+id/reset_rotate"
@@ -86,58 +85,6 @@
             android:layout_toRightOf="@id/reset_rotate" />
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/control_scale_bar"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_above="@+id/divider">
-
-        <ImageView
-            android:id="@+id/reset_scale"
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
-            android:scaleType="center"
-            android:src="@mipmap/j_ic_reset_40dp" />
-
-        <TextView
-            android:id="@+id/scale_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="2.5dp"
-            android:paddingLeft="45dp"
-            android:text="0.0"
-            android:textColor="@color/jimage_progress_wheel_line_color"
-            android:textSize="10.5dp" />
-
-        <com.zinc.libimage.widget.HorizontalProgressWheelView
-            android:id="@+id/progress_wheel_scale"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@id/scale_num"
-            android:layout_toRightOf="@id/reset_scale" />
-
-    </RelativeLayout>
-
-    <!--<ImageView-->
-    <!--android:id="@+id/image"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_above="@id/control_rotate_bar" />-->
-
-    <!--<com.zinc.libimage.view.view.CropImageViewView-->
-    <!--android:id="@+id/crop_image_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_above="@id/control_rotate_bar"-->
-    <!--/>-->
-
-    <!--<com.zinc.libimage.view.view.GestureImageView-->
-        <!--android:id="@+id/crop_image_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_above="@id/control_rotate_bar" />-->
 
     <com.zinc.libimage.view.view.JCropView
         android:id="@+id/crop_view"

@@ -6,6 +6,7 @@ import android.graphics.RectF;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
@@ -16,6 +17,7 @@ import com.zinc.libimage.callback.OverlayViewChangeListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * @author Jiang zinc
@@ -24,6 +26,10 @@ import java.io.IOException;
  */
 
 public class JCropView extends FrameLayout {
+
+    public static final String JPG = ".jpg";
+    public static final String PNG = ".png";
+    public static final String WEBP = ".webp";
 
     private OverlayView mOverlayView;
     private GestureImageView mGestureImageView;
@@ -47,7 +53,7 @@ public class JCropView extends FrameLayout {
 
     }
 
-    private void setListenersToViews(){
+    private void setListenersToViews() {
         mOverlayView.setOverlayViewChangeListener(new OverlayViewChangeListener() {
             @Override
             public void onCropRectUpdated(RectF cropRect) {
@@ -57,33 +63,63 @@ public class JCropView extends FrameLayout {
     }
 
     public void cropAndSave(){
+        cropAndSave("JImage");
+    }
 
-        Bitmap bitmap = mGestureImageView.cropAndSave();
+    public void cropAndSave(String folderName) {
+        cropAndSave(folderName, null);
+    }
 
-        File PHOTO_DIR = new File(Environment.getExternalStorageDirectory(),"image");//设置保存路径
-        File avaterFile = new File(PHOTO_DIR, System.currentTimeMillis()+"image.jpg");//设置文件名称
+    public void cropAndSave(String folderName, String fileName) {
+        cropAndSave(folderName, fileName, 100, PNG);
+    }
 
-        if(!PHOTO_DIR.exists()){
-            PHOTO_DIR.mkdir();
+    public void cropAndSave(String folderName, String fileName, int quality, @NonNull String type) {
+
+        Bitmap bitmap = mGestureImageView.crop();
+
+        File folder = new File(Environment.getExternalStorageDirectory(), folderName);//设置保存路径
+        File file = null;
+        if (TextUtils.isEmpty(fileName)) {
+            Random random = new Random(34);
+            file = new File(folder, "JImage_" + random.nextInt(10000) + "_" + System.currentTimeMillis() + type);//设置文件名称
         }
 
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        FileOutputStream fos = null;
         try {
-            avaterFile.createNewFile();
-            FileOutputStream fos = new FileOutputStream(avaterFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            file.createNewFile();
+            fos = new FileOutputStream(file);
+            if (type.equals(PNG)) {
+                bitmap.compress(Bitmap.CompressFormat.PNG, quality, fos);
+            } else if (type.equals(JPG)) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, fos);
+            } else if (type.equals(WEBP)) {
+                bitmap.compress(Bitmap.CompressFormat.WEBP, quality, fos);
+            }
             fos.flush();
-            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
 
-    public OverlayView getmOverlayView() {
+    public OverlayView getOverlayView() {
         return mOverlayView;
     }
 
-    public GestureImageView getmGestureImageView() {
+    public GestureImageView getCropImageView() {
         return mGestureImageView;
     }
 }

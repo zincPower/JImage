@@ -84,10 +84,6 @@ public class TransformImageView extends android.support.v7.widget.AppCompatImage
         setImageDrawable(new FastBitmapDrawable(bm));
     }
 
-    public TransformImageListener getmTransformImageListener() {
-        return mTransformImageListener;
-    }
-
     public void setmTransformImageListener(TransformImageListener mTransformImageListener) {
         this.mTransformImageListener = mTransformImageListener;
     }
@@ -119,6 +115,9 @@ public class TransformImageView extends android.support.v7.widget.AppCompatImage
                     @Override
                     public void onFailure(@NonNull Exception bitmapWorkerException) {
                         Log.e(TAG, "onFailure: setImageUri", bitmapWorkerException);
+                        if (mTransformImageListener != null) {
+                            mTransformImageListener.onLoadFailure(bitmapWorkerException);
+                        }
                     }
                 });
     }
@@ -172,7 +171,10 @@ public class TransformImageView extends android.support.v7.widget.AppCompatImage
 
         mBitmapLaidOut = true;
 
-//        setImageMatrix(mCurrentImageMatrix);
+        if (mTransformImageListener != null) {
+            mTransformImageListener.onLoadComplete();
+        }
+
     }
 
     public int getMaxBitmapSize() {
@@ -289,7 +291,6 @@ public class TransformImageView extends android.support.v7.widget.AppCompatImage
         return (float) Math.sqrt(Math.pow(getMatrixValue(matrix, Matrix.MSCALE_X), 2)
                 + Math.pow(getMatrixValue(matrix, Matrix.MSKEW_Y), 2));
     }
-
 
 
     public interface TransformImageListener {
