@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">JImage</string>
+    <string name="jimage_all_image">所有图片</string>
+    <string name="jimage_image_title">图片</string>
+    <string name="jimage_commit_with_num">确定(%1$d/%2$d)</string>
+    <string name="jimage_commit">确定</string>
+    <string name="jimage_num_postfix">%1$o张</string>
+    <string name="jimage_original_pic">原图</string>
+    <string name="jimage_preview">预览</string>
+    <string name="jimage_take_picture">拍照</string>
+
+    <string name="jimage_max_select_tip">你最多只能选择%1$d张图片</string>
+    <string name="jimage_edit">编辑</string>
+    <string name="jimage_select">选择</string>
+
+</resources>

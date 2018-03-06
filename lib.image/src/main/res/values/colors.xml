@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="jimage_primary_color">#2B2C30</color>
+    <color name="jimage_accent_color">#232126</color>
+    <color name="jimage_background">#181912</color>
+    <color name="jimage_item_bg">#282828</color>
+
+    <color name="jimage_text_color">@color/jimage_white</color>
+
+    <color name="jimage_select_bg">@color/jimage_blue</color>
+
+    <color name="jimage_window_bg">@color/jimage_white</color>
+
+    <color name="jimage_divider_color">#dcdcdc</color>
+
+    <color name="image_overlay">#20000000</color>
+    <color name="image_overlay2">#80000000</color>
+
+    <color name="jimage_btn_bg">@color/jimage_blue</color>
+    <color name="jimage_btn_press_bg">@color/jimage_dark_blue</color>
+
+    <color name="jimage_title_text">#333333</color>
+    <color name="jimage_dec_text">#999999</color>
+
+    <color name="jimage_blue">#0098e3</color>
+    <color name="jimage_dark_blue">#0076b1</color>
+    <color name="jimage_white">#ffffff</color>
+    <color name="imagepicker_transparent">@android:color/transparent</color>
+    <color name="imagepicker_statusbar">#303135</color>
+
+    <color name="jimage_progress_wheel_line_color">#808080</color>
+    <color name="jimage_divider_line_color">#303030</color>
+
+    <color name="jimage_dimmed_color">#8c000000</color>
+
+    <color name="jimage_overlay_grid_color">#80ffffff</color>
+    <color name="jimage_overlay_frame_color">#ffffff</color>
+
+</resources>
