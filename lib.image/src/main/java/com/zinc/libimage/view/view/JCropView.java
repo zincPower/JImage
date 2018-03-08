@@ -58,6 +58,7 @@ public class JCropView extends FrameLayout {
             @Override
             public void onCropRectUpdated(RectF cropRect) {
                 mGestureImageView.setCropRect(cropRect);
+
             }
         });
     }

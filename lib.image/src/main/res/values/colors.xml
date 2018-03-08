@@ -26,15 +26,23 @@
     <color name="jimage_blue">#0098e3</color>
     <color name="jimage_dark_blue">#0076b1</color>
     <color name="jimage_white">#ffffff</color>
-    <color name="imagepicker_transparent">@android:color/transparent</color>
+    <color name="jimage_transparent">@android:color/transparent</color>
     <color name="imagepicker_statusbar">#303135</color>
 
+    <!--轮播-->
     <color name="jimage_progress_wheel_line_color">#808080</color>
+    <!--分割线-->
     <color name="jimage_divider_line_color">#303030</color>
 
+    <!--截图遮罩颜色-->
     <color name="jimage_dimmed_color">#8c000000</color>
-
+    <!--截图分割线颜色-->
     <color name="jimage_overlay_grid_color">#80ffffff</color>
+    <!--截图框颜色-->
     <color name="jimage_overlay_frame_color">#ffffff</color>
+
+    <color name="jimage_unselect_color">#848484</color>
+    <color name="jimage_select_color">#1BB5E9</color>
+    <color name="jimage_child_control_color">#252525</color>
 
 </resources>

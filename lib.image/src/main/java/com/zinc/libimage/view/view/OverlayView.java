@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -16,6 +17,8 @@ import com.zinc.libimage.R;
 import com.zinc.libimage.callback.OverlayViewChangeListener;
 import com.zinc.libimage.utils.RectUtils;
 import com.zinc.libimage.utils.UIUtil;
+
+import java.util.Map;
 
 /**
  * @author Jiang zinc
@@ -73,6 +76,8 @@ public class OverlayView extends View {
     private int mCurrentTouchCornerIndex;
     private float mPreviousTouchX;
     private float mPreviousTouchY;
+
+    private boolean isFixTargetAspectRatio;
 
     private OverlayViewChangeListener mOverlayViewChangeListener;
 
@@ -281,7 +286,7 @@ public class OverlayView extends View {
             mPreviousTouchY = -1;
             mCurrentTouchCornerIndex = -1;
 
-            if(mOverlayViewChangeListener != null){
+            if (mOverlayViewChangeListener != null) {
                 mOverlayViewChangeListener.onCropRectUpdated(mCropViewRect);
             }
 
@@ -304,24 +309,65 @@ public class OverlayView extends View {
     private void updateCropViewRect(float touchX, float touchY) {
         mTempRect.set(mCropViewRect);
 
+        float resultTouchX = touchX;
+        float resultTouchY = touchY;
+
+        float deltaX;
+        float deltaY;
+
+        //如果是固定比例，则以横坐标为参考比例值
+        if (isFixTargetAspectRatio) {
+            switch (mCurrentTouchCornerIndex) {
+                case 0:
+                    deltaX = mCropViewRect.right - touchX;
+                    deltaY = deltaX / mTargetAspectRatio;
+                    resultTouchY = mCropViewRect.bottom - deltaY;
+                    break;
+                case 3:
+                    deltaX = mCropViewRect.right - touchX;
+                    deltaY = deltaX / mTargetAspectRatio;
+                    resultTouchY = mCropViewRect.top + deltaY;
+                    break;
+                case 1:
+                    deltaX = Math.abs(touchX - mCropViewRect.left);
+                    deltaY = deltaX / mTargetAspectRatio;
+                    resultTouchY = mCropViewRect.bottom - deltaY;
+                    break;
+                case 2:
+                    deltaX = touchX - mCropViewRect.left;
+                    deltaY = deltaX / mTargetAspectRatio;
+                    resultTouchY = mCropViewRect.top + deltaY;
+                    break;
+            }
+        }
+
+        Log.i("overlay", "x:" + resultTouchX + ";  y:" + resultTouchY + "; ratio:" + mTargetAspectRatio);
+
         switch (mCurrentTouchCornerIndex) {
             case 0:
-                mTempRect.set(touchX, touchY, mCropViewRect.right, mCropViewRect.bottom);
+                mTempRect.set(resultTouchX, resultTouchY, mCropViewRect.right, mCropViewRect.bottom);
                 break;
             case 1:
-                mTempRect.set(mCropViewRect.left, touchY, touchX, mCropViewRect.bottom);
+                mTempRect.set(mCropViewRect.left, resultTouchY, resultTouchX, mCropViewRect.bottom);
                 break;
             case 2:
-                mTempRect.set(mCropViewRect.left, mCropViewRect.top, touchX, touchY);
+                mTempRect.set(mCropViewRect.left, mCropViewRect.top, resultTouchX, resultTouchY);
                 break;
             case 3:
-                mTempRect.set(touchX, mCropViewRect.top, mCropViewRect.right, touchY);
+                mTempRect.set(resultTouchX, mCropViewRect.top, mCropViewRect.right, resultTouchY);
                 break;
         }
 
-        //高和宽在阀值内
-        boolean heightChange = mTempRect.height() >= mCropRectMinSize;
-        boolean widthChange = mTempRect.width() >= mCropRectMinSize;
+        boolean heightChange;
+        boolean widthChange;
+        if(isFixTargetAspectRatio){
+            boolean temp = (mTempRect.width()/mTempRect.height() == mTargetAspectRatio) && mTempRect.height()>=mCropRectMinSize && mTempRect.width()>= mCropRectMinSize;
+            widthChange = heightChange = temp;
+        }else{
+            //高和宽在阀值内
+            heightChange = mTempRect.height() >= mCropRectMinSize;
+            widthChange = mTempRect.width() >= mCropRectMinSize;
+        }
 
         mCropViewRect.set(
                 widthChange ? mTempRect.left : mCropViewRect.left,
@@ -399,7 +445,7 @@ public class OverlayView extends View {
         }
 
         //更新在cropImageView中的截图区域
-        if(mOverlayViewChangeListener != null){
+        if (mOverlayViewChangeListener != null) {
             mOverlayViewChangeListener.onCropRectUpdated(mCropViewRect);
         }
 
@@ -424,4 +470,7 @@ public class OverlayView extends View {
                 mDimmedStrokePaint);
     }
 
+    public void setFixTargetAspectRatio(boolean fixTargetAspectRatio) {
+        isFixTargetAspectRatio = fixTargetAspectRatio;
+    }
 }

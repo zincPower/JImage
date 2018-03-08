@@ -13,4 +13,11 @@
     <string name="jimage_edit">编辑</string>
     <string name="jimage_select">选择</string>
 
+    <string name="jimage_crop">裁剪</string>
+    <string name="jimage_filter">滤镜</string>
+    <string name="jimage_toolbox">编辑工具箱</string>
+    <string name="jimage_rotate">水平</string>
+    <string name="jimage_ratio">比例</string>
+    <string name="jimage_rotate_90">旋转</string>
+
 </resources>

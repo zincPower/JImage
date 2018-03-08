@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/control_ratio_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/jimage_control_bar_level_three"
+            android:background="@color/jimage_transparent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ratio_free_btn"
+                style="@style/RatioItem"
+                android:layout_width="33dp"
+                android:text="Free" />
+
+            <TextView
+                android:id="@+id/ratio_1_1_btn"
+                style="@style/RatioItem"
+                android:layout_width="33dp"
+                android:text="1:1" />
+
+            <TextView
+                android:id="@+id/ratio_4_3_btn"
+                style="@style/RatioItem"
+                android:layout_width="38.7dp"
+                android:layout_height="28dp"
+                android:text="4:3" />
+
+            <TextView
+                android:id="@+id/ratio_3_2_btn"
+                style="@style/RatioItem"
+                android:layout_width="42dp"
+                android:layout_height="28dp"
+                android:text="3:2" />
+
+            <TextView
+                android:id="@+id/ratio_16_9_btn"
+                style="@style/RatioItem"
+                android:layout_width="49.8dp"
+                android:layout_height="28dp"
+                android:text="16:9" />
+
+            <TextView
+                android:id="@+id/ratio_7_5_btn"
+                style="@style/RatioItem"
+                android:layout_width="39.2dp"
+                android:layout_height="28dp"
+                android:text="7:5" />
+
+            <TextView
+                android:id="@+id/ratio_5_4_btn"
+                style="@style/RatioItem"
+                android:layout_width="35dp"
+                android:layout_height="28dp"
+                android:text="5:4" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</merge>

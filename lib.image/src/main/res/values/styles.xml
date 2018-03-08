@@ -7,9 +7,31 @@
         <item name="colorAccent">@color/jimage_accent_color</item><!--带选中等状态控件的颜色-->
 
         <item name="colorControlNormal">@color/jimage_text_color</item><!--图标颜色左边及右边-->
-        <item name="actionMenuTextColor">@color/jimage_text_color</item><!--右边文字颜色 优先级高与 textColorPrimary-->
+        <item name="actionMenuTextColor">@color/jimage_text_color
+        </item><!--右边文字颜色 优先级高与 textColorPrimary-->
         <item name="android:textColorPrimary">@color/jimage_text_color</item>
 
+    </style>
+
+    <style name="ControlItem">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingBottom">1dp</item>
+    </style>
+
+    <style name="RatioItem">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/j_selector_ratio_border</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/tint_colors_gray2blue</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

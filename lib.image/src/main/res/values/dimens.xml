@@ -4,5 +4,8 @@
     <dimen name="jimage_width_horizontal_wheel_progress_line">2dp</dimen>
     <dimen name="jimage_margin_horizontal_wheel_progress_line">10dp</dimen>
 
+    <dimen name="jimage_control_bar_level_one">45dp</dimen>
+    <dimen name="jimage_control_bar_level_two">80dp</dimen>
+    <dimen name="jimage_control_bar_level_three">45dp</dimen>
 
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="jimage_ControlItem">
+        <attr name="title" format="string" />
+        <attr name="select_image" format="integer" />
+        <attr name="unselect_image" format="integer" />
+    </declare-styleable>
+
+</resources>

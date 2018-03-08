@@ -15,9 +15,8 @@ import android.view.View;
 import com.zinc.libimage.R;
 
 /**
- *
- * @date 创建时间：2018/2/9
  * @author Oleksii Shliama (https://github.com/shliama).
+ * @date 创建时间：2018/2/9
  * @description 横向刻度 todo 需要处理中轴线问题
  * @modify Jiang zinc 56002982@qq.com
  */
@@ -100,6 +99,7 @@ public class HorizontalProgressWheelView extends View {
         super.onDraw(canvas);
         //获取canvas可画区域rect
         canvas.getClipBounds(mCanvasClipBounds);
+        canvas.drawARGB(0, 0, 0, 0);
 
         //通过  canvas区域／（刻度宽度+刻度margin）  获取刻度数
         int linesCount = mCanvasClipBounds.width() / (mProgressLineWidth + mProgressLineMargin);
