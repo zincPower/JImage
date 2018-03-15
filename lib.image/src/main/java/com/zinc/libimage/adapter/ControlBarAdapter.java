@@ -51,7 +51,7 @@ public class ControlBarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        if (holder instanceof CropViewHolder) {
+        if (holder instanceof CropViewHolder) {         //裁剪项
 
             final BaseDetailControlInfo item = detailControlInfoList.get(position);
 
@@ -87,9 +87,9 @@ public class ControlBarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //                }
 //            });
 
-        } else if (holder instanceof FilterViewHolder) {
+        } else if (holder instanceof FilterViewHolder) {      //滤镜
 
-        } else if (holder instanceof ToolboxViewHolder) {
+        } else if (holder instanceof ToolboxViewHolder) {     //编辑工具箱
 
         }
 

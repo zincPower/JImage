@@ -84,9 +84,8 @@ public class ImageEditActivity extends BaseActivity implements View.OnClickListe
         mAdapter = new ControlBarAdapter(JImageConfig.cropDetailControlInfoList, ImageEditActivity.this);
         mRvControlBar.setAdapter(mAdapter);
 
-
-//        String url = "content://com.android.providers.media.documents/document/image%3A56248";
-        String url = "content://media/external/images/media/469781";
+        String url = "content://com.android.providers.media.documents/document/image%3A56248";
+//        String url = "content://media/external/images/media/469781";
         try {
             mCropImageView.setImageUri(Uri.parse(url), null);
         } catch (Exception e) {
