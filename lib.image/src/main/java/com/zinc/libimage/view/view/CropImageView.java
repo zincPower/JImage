@@ -150,7 +150,7 @@ public class CropImageView extends TransformImageView {
         float[] unrotatedImageCorners = Arrays.copyOf(imageCorners, imageCorners.length);
         mTempMatrix.mapPoints(unrotatedImageCorners);
 
-        //让截图反旋转 TODO 这里还有疑惑，需要在看
+        //让截图反旋转
         float[] unrotatedCropBoundsCorners = RectUtils.getCornersFromRect(mCropRect);
         mTempMatrix.mapPoints(unrotatedCropBoundsCorners);
 
@@ -344,6 +344,8 @@ public class CropImageView extends TransformImageView {
                 deltaX = -(imageIndents[0] + imageIndents[2]);
                 deltaY = -(imageIndents[1] + imageIndents[3]);
             } else {
+
+                //将裁剪区域旋转和图片一样的角度
                 RectF tempCropRect = new RectF(mCropRect);
                 mTempMatrix.reset();
                 mTempMatrix.setRotate(getCurrentAngle());
@@ -351,6 +353,7 @@ public class CropImageView extends TransformImageView {
 
                 float[] currentImageSides = RectUtils.getRectSidesFromCorners(mCurrentImageCorners);
 
+                //计算裁剪区域和图片的长宽比，取大值
                 deltaScale = Math.max(tempCropRect.width() / currentImageSides[0],
                         tempCropRect.height() / currentImageSides[1]);
 
@@ -358,6 +361,7 @@ public class CropImageView extends TransformImageView {
             }
 
             if (animate) {
+                //todo 此处deltaX和deltaY有bug，会平移至图片中间
                 post(mWrapCropBoundsRunnable = new WrapCropBoundsRunnable(CropImageView.this, mImageToWrapCropBoundsAnimDuration,
                         currentX, currentY, deltaX, deltaY,
                         currentScale, deltaScale, willImageWrapCropBoundsAfterTranslate));

@@ -158,10 +158,10 @@ public class BitmapLoadTask extends AsyncTask<Void, Void, BitmapLoadTask.BitmapW
 //                Log.e(TAG, "Downloading failed", e);
 //                throw e;
 //            }
-        } else if ("content".equals(inputUriScheme)) {
+        } else if ("content".equals(inputUriScheme)) {       //content
             String path = getFilePath();
             if (!TextUtils.isEmpty(path) && new File(path).exists()) {
-                mInputUri = Uri.fromFile(new File(path));
+                mInputUri = Uri.fromFile(new File(path));   //转换为file:///xxxxx类型
             } else {
                 try {
                     copyFile(mInputUri, mOutputUri);
@@ -170,7 +170,7 @@ public class BitmapLoadTask extends AsyncTask<Void, Void, BitmapLoadTask.BitmapW
                     throw e;
                 }
             }
-        } else if (!"file".equals(inputUriScheme)) {
+        } else if (!"file".equals(inputUriScheme)) {        //不是以file开头的抛异常
             Log.e(TAG, "Invalid Uri scheme " + inputUriScheme);
             throw new IllegalArgumentException("Invalid Uri scheme" + inputUriScheme);
         }

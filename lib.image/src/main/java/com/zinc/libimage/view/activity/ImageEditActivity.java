@@ -18,10 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zinc.libimage.R;
-import com.zinc.libimage.adapter.ControlBarAdapter;
-import com.zinc.libimage.config.JImageConfig;
-import com.zinc.libimage.model.ControlTabItemVO;
-import com.zinc.libimage.model.detatilControl.BaseDetailControlInfo;
 import com.zinc.libimage.view.view.ControlItemView;
 import com.zinc.libimage.view.view.GestureImageView;
 import com.zinc.libimage.view.view.JCropView;
@@ -52,7 +48,7 @@ public class ImageEditActivity extends BaseActivity implements View.OnClickListe
     private GestureImageView mCropImageView;
     private OverlayView mOverlayView;
 
-    private ControlBarAdapter mAdapter;
+//    private ControlBarAdapter mAdapter;
 
     @Override
     public int getLayoutId() {
@@ -63,12 +59,12 @@ public class ImageEditActivity extends BaseActivity implements View.OnClickListe
     public void initView() {
 
         mCropView = findViewById(R.id.crop_view);
-        mFlDetailControlBar = findViewById(R.id.fl_detail_control_bar);
-        mRvControlBar = findViewById(R.id.rv_control_bar);
-        mLlControlTypeBar = findViewById(R.id.ll_control_type_bar);
-        mCropControlBtn = findViewById(R.id.crop_control_btn);
-        mFilterControlBtn = findViewById(R.id.filter_control_btn);
-        mToolboxControlBtn = findViewById(R.id.toolbox_control_btn);
+//        mFlDetailControlBar = findViewById(R.id.fl_detail_control_bar);
+//        mRvControlBar = findViewById(R.id.rv_control_bar);
+//        mLlControlTypeBar = findViewById(R.id.ll_control_type_bar);
+//        mCropControlBtn = findViewById(R.id.crop_control_btn);
+//        mFilterControlBtn = findViewById(R.id.filter_control_btn);
+//        mToolboxControlBtn = findViewById(R.id.toolbox_control_btn);
 
         mCropImageView = mCropView.getCropImageView();
         mOverlayView = mCropView.getOverlayView();
@@ -78,14 +74,14 @@ public class ImageEditActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void initData() {
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRvControlBar.setLayoutManager(linearLayoutManager);
-        mAdapter = new ControlBarAdapter(JImageConfig.cropDetailControlInfoList, ImageEditActivity.this);
-        mRvControlBar.setAdapter(mAdapter);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        mRvControlBar.setLayoutManager(linearLayoutManager);
+//        mAdapter = new ControlBarAdapter(JImageConfig.cropDetailControlInfoList, ImageEditActivity.this);
+//        mRvControlBar.setAdapter(mAdapter);
 
-        String url = "content://com.android.providers.media.documents/document/image%3A56248";
-//        String url = "content://media/external/images/media/469781";
+//        String url = "content://com.android.providers.media.documents/document/image%3A56248";
+        String url = "content://media/external/images/media/469781";
         try {
             mCropImageView.setImageUri(Uri.parse(url), null);
         } catch (Exception e) {

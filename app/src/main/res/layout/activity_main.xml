@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.zinc.jimage.MainActivity">
 
     <!--<com.zinc.libimage.widget.TransformImageView-->
-        <!--android:id="@+id/transform"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+    <!--android:id="@+id/transform"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
 
-    <com.zinc.libimage.widget.MaskView
+    <!--<com.zinc.libimage.widget.MaskView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+    <Button
+        android:id="@+id/btn_edit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="50dp"
+        android:text="前往图片编辑" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_palette"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="前往画板" />
+
+</LinearLayout>

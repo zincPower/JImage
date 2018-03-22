@@ -4,10 +4,6 @@ import android.support.v4.content.ContextCompat;
 
 import com.zinc.libimage.R;
 import com.zinc.libimage.model.ControlTabItemVO;
-import com.zinc.libimage.model.detatilControl.BaseDetailControlInfo;
-import com.zinc.libimage.model.detatilControl.RatioDetailControlInfo;
-import com.zinc.libimage.model.detatilControl.RightRotateDetailControlInfo;
-import com.zinc.libimage.model.detatilControl.RotateDetailControlInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,31 +34,31 @@ public class JImageConfig {
 //    }
 
     //用于存储裁剪的子操作
-    public static List<BaseDetailControlInfo> cropDetailControlInfoList = new ArrayList<>();
-
-    static {
-        cropDetailControlInfoList.add(new RotateDetailControlInfo(BaseDetailControlInfo.CROP,
-                R.string.jimage_rotate,
-                R.mipmap.j_ic_rotate,
-                R.mipmap.j_ic_rotate_select,
-                true));
-
-        cropDetailControlInfoList.add(new RatioDetailControlInfo(BaseDetailControlInfo.CROP,
-                R.string.jimage_ratio,
-                R.mipmap.j_ic_ratio,
-                R.mipmap.j_ic_ratio_select,
-                false));
-
-        cropDetailControlInfoList.add(new RightRotateDetailControlInfo(BaseDetailControlInfo.CROP,
-                R.string.jimage_rotate_90,
-                R.mipmap.j_ic_rotate_90,
-                R.mipmap.j_ic_rotate_90_select,
-                false));
-    }
+//    public static List<BaseDetailControlInfo> cropDetailControlInfoList = new ArrayList<>();
+//
+//    static {
+//        cropDetailControlInfoList.add(new RotateDetailControlInfo(BaseDetailControlInfo.CROP,
+//                R.string.jimage_rotate,
+//                R.mipmap.j_ic_rotate,
+//                R.mipmap.j_ic_rotate_select,
+//                true));
+//
+//        cropDetailControlInfoList.add(new RatioDetailControlInfo(BaseDetailControlInfo.CROP,
+//                R.string.jimage_ratio,
+//                R.mipmap.j_ic_ratio,
+//                R.mipmap.j_ic_ratio_select,
+//                false));
+//
+//        cropDetailControlInfoList.add(new RightRotateDetailControlInfo(BaseDetailControlInfo.CROP,
+//                R.string.jimage_rotate_90,
+//                R.mipmap.j_ic_rotate_90,
+//                R.mipmap.j_ic_rotate_90_select,
+//                false));
+//    }
 
     //用于存储滤镜的子操作
-    private List<BaseDetailControlInfo> filterDetailControlInfoList;
-    //用于存储编辑工具箱的子操作
-    private List<BaseDetailControlInfo> toolboxDetailControlInfoList;
+//    private List<BaseDetailControlInfo> filterDetailControlInfoList;
+//    //用于存储编辑工具箱的子操作
+//    private List<BaseDetailControlInfo> toolboxDetailControlInfoList;
 
 }

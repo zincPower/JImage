@@ -187,7 +187,6 @@ public class TransformImageView extends android.support.v7.widget.AppCompatImage
     /**
      * 获取matrix的旋转角度
      * <p>
-     * todo 这里的公式不太懂
      */
     public float getMatrixAngle(@NonNull Matrix matrix) {
         return (float) -(Math.atan2(getMatrixValue(matrix, Matrix.MSKEW_X),

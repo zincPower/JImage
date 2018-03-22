@@ -1,11 +1,13 @@
 package com.zinc.libimage.view.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.zinc.libimage.R;
@@ -36,7 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void initToolbar() {
         mToolbar = findViewById(R.id.toolbar);
         mTvCommit = findViewById(R.id.tv_commit);
-        if(mToolbar != null ){
+        if (mToolbar != null) {
             setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -52,13 +54,34 @@ public abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public abstract int getLayoutId();
+    protected abstract int getLayoutId();
 
-    public abstract void initView();
+    protected abstract void initView();
 
-    public abstract void initData();
+    protected abstract void initData();
 
-    public abstract void onCreate();
+    protected abstract void onCreate();
 
-    public abstract void initIntent(Intent intent);
+    protected abstract void initIntent(Intent intent);
+
+    //是否开启沉静模式，默认不开启
+    protected boolean isImmersion() {
+        return false;
+    }
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus && Build.VERSION.SDK_INT >= 19 && isImmersion()) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
 }
